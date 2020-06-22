@@ -57,37 +57,55 @@ public class ControllerVideogioco {
 	}
 	@RequestMapping(value = "/sort", method = RequestMethod.POST)
 	public ModelAndView sort(@RequestParam("sort") String sort, Map<String, Object> model) {
+		ModelAndView view = new ModelAndView("videogiochi");
+		Videogioco videogioco = new Videogioco();
+		model.put("videogioco", videogioco);
 		switch (Integer.parseInt(sort)) {
 		case 1: {
-			ModelAndView view = new ModelAndView("videogiochi");
-			Videogioco videogioco = new Videogioco();
-			model.put("videogioco", videogioco);
 			view.addObject("lista", service.sortTitolo());
 			return view;
 		}
 		case 2: {
-			ModelAndView view = new ModelAndView("videogiochi");
-			Videogioco videogioco = new Videogioco();
-			model.put("videogioco", videogioco);
 			view.addObject("lista", service.sortClassificazione());
 			return view;
 		}
 		case 3: {
-			ModelAndView view = new ModelAndView("videogiochi");
-			Videogioco videogioco = new Videogioco();
-			model.put("videogioco", videogioco);
 			view.addObject("lista", service.sortCategoria());
 			return view;
 		}
 		case 4: {
-			ModelAndView view = new ModelAndView("videogiochi");
-			Videogioco videogioco = new Videogioco();
-			model.put("videogioco", videogioco);
 			view.addObject("lista", service.sortPrezzo());
 			return view;
 		}
 		}
 		return null;
 	}
+	
+	@RequestMapping(value = "/filter", method = RequestMethod.POST)
+	public ModelAndView filter(@RequestParam("filter") String filter, @RequestParam("text") String text, Map<String, Object> model) {
+		ModelAndView view = new ModelAndView("videogiochi");
+		Videogioco videogioco = new Videogioco();
+		model.put("videogioco", videogioco);
+		switch (Integer.parseInt(filter)) {
+		case 1: {
+			view.addObject("lista", service.filterTitolo(text));
+			return view;
+		}
+		case 2: {
+			view.addObject("lista", service.filterClassificazione(Integer.parseInt(text)));
+			return view;
+		}
+		case 3: {
+			view.addObject("lista", service.filterCategoria(text));
+			return view;
+		}
+		case 4: {
+			view.addObject("lista", service.filterPrezzo(Double.parseDouble(text)));
+			return view;
+		}
+		}
+		return null;
+	}
+
 
 }

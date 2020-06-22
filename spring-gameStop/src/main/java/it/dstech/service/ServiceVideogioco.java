@@ -54,4 +54,17 @@ public class ServiceVideogioco {
 	public List<Videogioco> sortPrezzo() {
 		return repo.sortPrezzo();
 	}
+	public List<Videogioco> filterTitolo(String titolo) {
+		return repo.filterTitolo(titolo);
+	}
+	public List<Videogioco> filterClassificazione(int classificazione) {
+		return repo.filterClassificazione(classificazione);
+	}
+	public List<Videogioco> filterCategoria(String categoria) {
+		return repo.filterCategoria(categoria);
+	}
+	public List<Videogioco> filterPrezzo(double prezzo) {
+		return repo.filterPrezzo(prezzo);
+	}
+	
 }

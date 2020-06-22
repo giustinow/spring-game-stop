@@ -40,8 +40,12 @@
   <option value="3">Categoria</option>
   <option value="4">Prezzo</option>
 </select>
-<input type="text" name="testo">
+<input type="text" name="text">
 <input type="submit" value="Filtra">
+</form>
+<br>
+<form action="videogiochi" method="post">
+<input type="submit" value="Mostra tutti">
 </form>
 <table>
 		<tr>
