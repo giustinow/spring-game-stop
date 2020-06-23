@@ -1,5 +1,7 @@
 package it.dstech.controller;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,13 +24,35 @@ public class ControllerVideogioco {
 	public ModelAndView home() {
 		return new ModelAndView("home");
 	}
-
+	public List<String> categoriaVideogiochi(){
+		List<String> categoria = new ArrayList<String>();
+		categoria.add("Avventura");
+		categoria.add("Battle Royale");
+		categoria.add("FPS");
+		categoria.add("MOBA");
+		categoria.add("Open World");
+		categoria.add("Horror");
+		categoria.add("Sopravvivenza");
+		return categoria;
+	}
+	public List<Integer> classificazioneVideogiochi(){
+		List<Integer> classificazione = new ArrayList<Integer>();
+		classificazione.add(3);
+		classificazione.add(7);
+		classificazione.add(12);
+		classificazione.add(16);
+		classificazione.add(18);
+		return classificazione;
+	}
+	
 	@RequestMapping(value = "/videogiochi", method = RequestMethod.POST)
 	public ModelAndView videogiochi(Map<String, Object> model) {
 			ModelAndView view = new ModelAndView("videogiochi");
 			Videogioco videogioco = new Videogioco();
 			model.put("videogioco", videogioco);
 			view.addObject("lista", service.listAll());
+			view.addObject("categoria", categoriaVideogiochi());
+			view.addObject("classificazione", classificazioneVideogiochi());
 			return view;
 	}
 	
@@ -47,6 +71,8 @@ public class ControllerVideogioco {
 	public ModelAndView modifica(@RequestParam("videogioco") Long id) {
 		ModelAndView view = new ModelAndView("modifica");
 		view.addObject("videogioco", service.get(id));
+		view.addObject("categoria", categoriaVideogiochi());
+		view.addObject("classificazione", classificazioneVideogiochi());
 		return view;
 	}
 

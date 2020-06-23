@@ -6,21 +6,47 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Digimon</title>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+<title>Videogiochi</title>
 </head>
 <body>
-<form:form action="nuovoVideogioco" method="post" modelAttribute="videogioco">
-<label>Titolo</label>
-<form:input path="titolo"/>
-<label>Classificazione</label>
-<form:input path="classificazione"/>
-<label>Categoria</label>
-<form:input path="categoria"/>
-<label>Prezzo</label>
-<form:input path="prezzo"/>
-<input type="submit" value="Aggiungi">
-</form:form>
+<hr>
+<h4 class="text-center">Aggiungi Gioco</h4>
 <br>
+<div class="row justify-content-center align-items-center">
+<form:form action="nuovoVideogioco" method="post" modelAttribute="videogioco" class="form-inline">
+ <div class="row justify-content-center">
+<div class="form-group">
+<label>Titolo</label>
+<form:input path="titolo" class="form-control"/>
+</div>
+<div class="form-group">
+<label>Classificazione PEGI:</label>
+<form:select path="classificazione">
+	<form:options items="${classificazione}" />
+</form:select>
+</div>
+<div class="form-group">
+<label>Categoria</label>
+<form:select path="categoria">
+	<form:options items="${categoria}" />
+</form:select>
+</div>
+<div class="form-group">
+<label>Prezzo</label>
+<div class="col-xs-1">
+<form:input path="prezzo" class="form-control"/>
+</div>
+<br>
+</div>
+<input type="submit" class="btn btn-primary" value="Aggiungi">
+</div>
+</form:form>
+</div>
+
+<hr>
+<br>
+<div class="container center_div">
 <label>Ordina per:</label>
 <form action="sort" method="post">
 <select name="sort">
@@ -29,9 +55,8 @@
   <option value="3">Categoria</option>
   <option value="4">Prezzo</option>
 </select>
-<input type="submit" value="Ordina">
+<input type="submit" class="btn btn-secondary" value="Ordina">
 </form>
-<br>
 <label>Filtra per:</label>
 <form action="filter" method="post">
 <select name="filter">
@@ -41,13 +66,17 @@
   <option value="4">Prezzo</option>
 </select>
 <input type="text" name="text">
-<input type="submit" value="Filtra">
+<input type="submit" class="btn btn-secondary" value="Filtra">
 </form>
+</div>
 <br>
 <form action="videogiochi" method="post">
-<input type="submit" value="Mostra tutti">
+ <div class="text-center">
+<input type="submit" class="btn btn-danger" value="Mostra tutti">
+</div>
 </form>
-<table>
+<table class="table table-striped">
+<thead>
 		<tr>
 			<th>Titolo</th>
 			<th>Classificazione Pegi</th>
@@ -55,7 +84,9 @@
 			<th>Prezzo</th>
 			<th></th>
 		</tr>
+		</thead>
 		<c:forEach items="${lista}" var="videogioco">
+		<tbody>
 		<tr>
 			<td>${videogioco.titolo}</td>
 			<td>${videogioco.classificazione}</td>
@@ -67,9 +98,12 @@
 			</td>
 		</tr>
 		</c:forEach>
+		</tbody>
 	</table>
 	<form action="home">
-	<input type="submit" value="Torna Alla Home">
+	 <div class="text-center">
+	<input type="submit" class="btn btn-primary" value="Torna Alla Home">
+	 </div>
 	</form>
 </body>
 </html>
